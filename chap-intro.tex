@@ -1,0 +1,26 @@
+\chapter{Introduction}
+
+\sysname{} is fast, precise and portable library for measuring the dynamic
+behavior of software with respect to CPU utilization, memory allocation and
+many other quantities.  The goal is to provide instrumentation that is
+detailed enough to pinpoint performance bottlenecks or bugs, yet
+lightweight enough that programmers can use it pervasively without fear of
+noticeable slowdown.
+
+In addition to the code instrumentation, \sysname{} features a sampling
+tool to run a certain experiment repeatedly, until certain measured
+quantities therein can be stated with confidence.
+
+With our work, we consolidate several existing benchmark libraries for
+Common Lisp, namely
+
+\begin{itemize}
+\item \textsc{Metering}, written by Chris McConell, Skef Wholey, Rob
+  MacLachlan, Mark Kantrowitz and Daniel Kochmański.
+
+\item \textsc{trivial-benchmak}, written by Nicolas Hafner.
+
+\item \textsc{the-cost-of-nothing}, written by Marco Heisig.
+
+\item \textsc{cleavir-meter}, written by Robert Strandh.
+\end{itemize}
