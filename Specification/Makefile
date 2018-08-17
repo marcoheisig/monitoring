@@ -1,4 +1,4 @@
-NAME=cl-meter
+NAME=monitoring
 
 TEXFILES=$(NAME).tex $(shell ./tex-dependencies $(NAME).tex)
 BIBFILES=$(NAME).bib

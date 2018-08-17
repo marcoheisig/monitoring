@@ -1,0 +1,36 @@
+\section{Aggregators}
+\label{sec:aggregators}
+
+Aggregators gather the data that is passed to \texttt{monitor-quantity} in
+a particular fashion.  Furthermore, aggregators can specialize the generic
+functions \texttt{enter-monitoring-region} and
+\texttt{leave-monitoring-region} to track the dynamic context of monitoring
+operations.
+
+The programmer can choose a particular aggregators to gather more or less
+detailed insights into his program.
+
+\Defclass {aggregator}
+
+The abstract base class of all aggregators.
+
+\Defclass {continuous-aggregator}
+
+The abstract base class of all aggregators that require only a bounded
+amount of memory, independent of the number of measurements that are
+aggregated.
+
+\Defclass {full-aggregator}
+
+This aggregator tracks the full hierarchy of monitoring regions, all
+quantities captured in each region and the cpu-time and consing within each
+region.
+
+\Defclass {shallow-aggregator}
+
+This aggregator does not track the hierarchy of monitoring regions, but
+accumulates all monitored quantities in a single, flat data structure.
+
+\Defmacro {with-aggregator} {(aggregator) \body{} body}
+
+Use \textit{aggregator} for all monitoring operations in \textit{body}.

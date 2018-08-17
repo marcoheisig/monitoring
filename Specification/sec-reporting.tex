@@ -1,0 +1,15 @@
+\section{Reporting}
+\label{sec:reporting}
+
+During reporting, the data within an aggregator is processed such that it
+is useful for human inspection.  Several reporting mechanisms are
+conceivable, e.g., via output streams, CLIM, or by serving the results on a
+web interface.
+
+Several things should be kept in mind when designing the report protocol:
+\begin{itemize}
+\item It should be possible to generate reports while the monitored program
+  is still running.
+\item When generating reports of running programs, the report should
+  nevertheless capture a consistent state.  Some kind of locking is in order.
+\end{itemize}

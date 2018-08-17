@@ -1,0 +1,56 @@
+\section{Monitoring Regions}
+\label{sec:monitoring-regions}
+
+The goal of this library is to inspect the dynamic behavior of a program.
+Not only do we want to track statistics about certain quantities or events,
+but we also want to know their context.  To model the context of an
+observation, we introduce \emph{monitoring regions}.
+
+A monitoring region is not mutable after creation and consequently cannot
+capture any data itself.  This job is delegated to an \emph{aggregator}, as
+described in section \ref{sec:aggregators}.
+
+\Defclass {monitoring-region}
+
+The base class of all monitoring regions.  Each monitoring operation, i.e.,
+each use of \texttt{monitor}, happens in the context of a particular
+monitoring region.
+
+\Defmacro {with-monitoring-region} {(name \key{}class \allow{}) \\ \body{} body}
+
+At load-time, create an instance of \textit{class} with the given
+\textit{name} and keyword arguments.  Neither \textit{name}, nor the other
+arguments are evaluated.  If the keyword argument \textit{class} is not
+supplied, it defaults to the class \texttt{monitoring-region}.
+
+At run-time, invoke the forms in \textit{body} in a dynamic environment
+where the active region is bound to the previously created monitoring
+region instance.
+
+\Defgeneric {monitoring-region-name} {monitoring-region}
+
+The symbol that was supplied as the \textit{name} argument to
+\textit{monitoring-region}.
+
+\Defmacro {monitor} {quantity kind}
+
+Call the generic function \texttt{monitor-quantity}.  The symbol
+\textit{kind} names a class that is instantiated at load-time and passed to
+\texttt{monitor-quantity} as a second argument.  The current region and
+current aggregator are passed as third and fourth argument, respectively.
+
+\Defgeneric {monitor-quantity} {quantity kind region aggregator}
+
+Register the data point consisting of \textit{quantity} and \textit{kind}
+in the context of \textit{region} in \textit{aggregator}.  The default
+method for this function does nothing.
+
+\Defgeneric {enter-monitoring-region} {region aggregator}
+
+This generic function is invoked by \texttt{with-monitoring-region} before
+it executes its body.
+
+\Defgeneric {leave-monitoring-region} {region aggregator}
+
+This generic function is invoked by \texttt{with-monitoring-region}
+when control is transferred outside of its body.
